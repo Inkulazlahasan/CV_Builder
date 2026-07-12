@@ -18,7 +18,7 @@ A fully functional ASP.NET Core MVC web application that allows users to manage 
 ![Homepage](Screenshots/HomePage.png)
 
 ### 🛠️ Admin Dashboard (Manage Projects, Education, Skills)
-![Dashboard](Screenshots/Admin Dashboard.png)
+![Admin Dashboard](Screenshots/Admin DAshboard.png)
 
 ### ✏️ Edit CV Content & Profile
 ![Edit Profile](ScreenShots/EditPersonalInfo.png)
