@@ -1,0 +1,102 @@
+﻿@model CV_Builder.Models.PersonalInfo
+@{
+    ViewData["Title"] = "Edit CV Content";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4" style="max-width:800px;">
+    <h2>Edit Personal Information & CV Content</h2>
+
+    <!-- ✅ IMPORTANT: Added enctype="multipart/form-data" to enable file upload -->
+    <form method="post" enctype="multipart/form-data">
+        <div class="row">
+            <!-- LEFT COLUMN -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input asp-for="FullName" class="form-control" />
+                </div>
+                <div class="form-group mt-2">
+                    <label>Title</label>
+                    <input asp-for="Title" class="form-control" />
+                </div>
+                <div class="form-group mt-2">
+                    <label>Sub-Title</label>
+                    <input asp-for="SubTitle" class="form-control" />
+                </div>
+                <div class="form-group mt-2">
+                    <label>Email</label>
+                    <input asp-for="Email" class="form-control" />
+                </div>
+                <div class="form-group mt-2">
+                    <label>Phone</label>
+                    <input asp-for="Phone" class="form-control" />
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Address</label>
+                    <input asp-for="Address" class="form-control" />
+                </div>
+                <div class="form-group mt-2">
+                    <label>Hometown</label>
+                    <input asp-for="Hometown" class="form-control" />
+                </div>
+                <div class="form-group mt-2">
+                    <label>LinkedIn</label>
+                    <input asp-for="LinkedIn" class="form-control" />
+                </div>
+                <div class="form-group mt-2">
+                    <label>GitHub</label>
+                    <input asp-for="Github" class="form-control" />
+                </div>
+
+                <!-- ✅ NEW: Profile Photo Upload Section -->
+                <div class="form-group mt-2">
+                    <label>Profile Photo</label>
+                    <input type="file" name="photoFile" class="form-control" accept="image/*" />
+                    @if (!string.IsNullOrEmpty(Model.PhotoPath))
+                    {
+                        <div class="mt-2">
+                            <img src="@Model.PhotoPath" style="max-width:100px; border-radius:50%; border:2px solid #ddd;" />
+                            <span class="text-muted ms-2">Current photo</span>
+                        </div>
+                    }
+                    else
+                    {
+                        <small class="text-muted">No photo uploaded yet. Upload one to display on your CV.</small>
+                    }
+                </div>
+
+            </div>
+        </div>
+
+        <!-- BOTTOM: Text Areas -->
+        <div class="row mt-3">
+            <div class="col-12">
+                <div class="form-group">
+                    <label>Career Objective</label>
+                    <textarea asp-for="CareerObjective" class="form-control" rows="3"></textarea>
+                </div>
+                <div class="form-group mt-2">
+                    <label>Profile Summary</label>
+                    <textarea asp-for="ProfileSummary" class="form-control" rows="4"></textarea>
+                </div>
+                <div class="form-group mt-2">
+                    <label>Research Interests</label>
+                    <input asp-for="ResearchInterests" class="form-control" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Hidden Fields -->
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="PhotoPath" />
+
+        <!-- Buttons -->
+        <button type="submit" class="btn btn-primary mt-3">💾 Save All Changes</button>
+        <a asp-action="Dashboard" class="btn btn-secondary mt-3">Cancel</a>
+    </form>
+</div>

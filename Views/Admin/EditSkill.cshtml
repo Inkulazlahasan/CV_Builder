@@ -1,0 +1,33 @@
+﻿@model CV_Builder.Models.Skill
+@{
+    ViewData["Title"] = Model.Id == 0 ? "Add Skill" : "Edit Skill";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4" style="max-width:600px;">
+    <h2>@(Model.Id == 0 ? "Add New" : "Edit") Skill</h2>
+    <form method="post">
+        <div class="form-group">
+            <label>Skill Name (e.g., Python, Bengali)</label>
+            <input asp-for="Name" class="form-control" />
+        </div>
+        <div class="form-group mt-2">
+            <label>Category</label>
+            <select asp-for="Category" class="form-control">
+                <option value="Technical Skills">Technical Skills</option>
+                <option value="Languages">Languages</option>
+            </select>
+        </div>
+        <div class="form-group mt-2">
+            <label>Proficiency (e.g., Advanced, Native, Basic)</label>
+            <input asp-for="Proficiency" class="form-control" />
+        </div>
+        <div class="form-group mt-2">
+            <label>Display Order (Lower numbers appear first)</label>
+            <input asp-for="DisplayOrder" class="form-control" type="number" min="0" />
+        </div>
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-primary mt-3">Save</button>
+        <a asp-action="Dashboard" class="btn btn-secondary mt-3">Cancel</a>
+    </form>
+</div>

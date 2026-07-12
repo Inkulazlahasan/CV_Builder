@@ -1,0 +1,23 @@
+/* === General Reset & Typography === */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f4f7fc;
+}
+
+/* === Sidebar Link Hover === */
+.offcanvas .nav-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 0;
+}
+
+/* === Footer Fix for Print === */
+footer {
+    display: block;
+}
+
+/* === RESPONSIVE TWEAKS === */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1.0rem !important;
+    }
+}

@@ -1,0 +1,34 @@
+﻿@model CV_Builder.Models.Education
+@{
+    ViewData["Title"] = Model.Id == 0 ? "Add Education" : "Edit Education";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4" style="max-width:600px;">
+    <h2>@(Model.Id == 0 ? "Add New" : "Edit") Education</h2>
+    <form method="post">
+        <div class="form-group">
+            <label>Degree (e.g., B.Sc. in CSE)</label>
+            <input asp-for="Degree" class="form-control" />
+        </div>
+        <div class="form-group mt-2">
+            <label>Institution</label>
+            <input asp-for="Institution" class="form-control" />
+        </div>
+        <div class="form-group mt-2">
+            <label>Result (e.g., 3.62/4.00 or 5.00/5.00)</label>
+            <input asp-for="Result" class="form-control" />
+        </div>
+        <div class="form-group mt-2">
+            <label>Passing Year</label>
+            <input asp-for="PassingYear" class="form-control" placeholder="e.g., 2020" />
+        </div>
+        <div class="form-group mt-2">
+            <label>Display Order (Lower numbers appear first)</label>
+            <input asp-for="DisplayOrder" class="form-control" type="number" min="0" />
+        </div>
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-primary mt-3">Save</button>
+        <a asp-action="Dashboard" class="btn btn-secondary mt-3">Cancel</a>
+    </form>
+</div>

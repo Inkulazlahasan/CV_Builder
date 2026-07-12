@@ -1,0 +1,428 @@
+﻿@model CV_Builder.Models.DashboardViewModel
+@{
+    ViewData["Title"] = "My CV";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    /* ---------- DEFAULT SCREEN STYLES ---------- */
+    body {
+        background: #eef2f7;
+        font-family: 'Segoe UI', 'Arial', sans-serif;
+        padding: 20px 0;
+    }
+
+    .cv-wrapper {
+        max-width: 1000px;
+        margin: 0 auto;
+        background: white;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+        padding: 40px 45px;
+        border-radius: 8px;
+        border-top: 7px solid #0d6efd; /* Hardcoded professional blue */
+    }
+
+    .cv-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid #f0f2f5;
+        padding-bottom: 20px;
+        margin-bottom: 25px;
+    }
+
+    .name-title h1 {
+        font-size: 2.4rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        margin: 0;
+        color: #1a2634;
+        text-transform: uppercase;
+    }
+
+    .name-title h3 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin: 4px 0 0 0;
+        color: #0d6efd;
+        letter-spacing: 0.5px;
+    }
+
+    .name-title h5 {
+        font-size: 0.95rem;
+        font-weight: 400;
+        margin: 2px 0 0 0;
+        color: #4a5b6e;
+    }
+
+    .contact-block {
+        text-align: right;
+        font-size: 0.9rem;
+        line-height: 1.7;
+        color: #2c3e50;
+    }
+
+        .contact-block a {
+            color: #0d6efd;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+            .contact-block a:hover {
+                text-decoration: underline;
+            }
+
+    .cv-section h2 {
+        font-size: 1.2rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-bottom: 2px solid #0d6efd;
+        padding-bottom: 6px;
+        margin-bottom: 15px;
+        color: #1a2634;
+    }
+
+    .text-block {
+        text-align: justify;
+        line-height: 1.7;
+        font-size: 0.95rem;
+    }
+
+    .project-entry {
+        margin-bottom: 20px;
+    }
+
+        .project-entry h4 {
+            font-weight: 700;
+            font-size: 1.05rem;
+            margin: 0 0 2px 0;
+            color: #1a2634;
+            display: inline;
+        }
+
+        .project-entry .project-link {
+            font-weight: 600;
+            color: #0d6efd;
+            font-size: 0.85rem;
+            margin-left: 8px;
+        }
+
+        .project-entry .tech-tag {
+            background: #e9ecf0;
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #2c3e50;
+            display: inline-block;
+            margin-top: 4px;
+        }
+
+        .project-entry p {
+            margin: 4px 0 0 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+    .row-split {
+        display: flex;
+        gap: 40px;
+    }
+
+    .col-left {
+        flex: 1.5;
+    }
+
+    .col-right {
+        flex: 1;
+    }
+
+    .edu-item {
+        margin-bottom: 12px;
+        border-bottom: 1px dashed #e9ecf0;
+        padding-bottom: 8px;
+    }
+
+        .edu-item strong {
+            font-weight: 700;
+            display: block;
+            font-size: 0.95rem;
+        }
+
+        .edu-item .meta {
+            font-size: 0.9rem;
+            color: #3d5166;
+        }
+
+            .edu-item .meta span {
+                float: right;
+                font-weight: 600;
+                color: #0d6efd;
+            }
+
+    .skill-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+        .skill-list li {
+            padding: 4px 0;
+            border-bottom: 1px solid #f0f2f5;
+            font-size: 0.95rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .skill-list .proficiency {
+            color: #6c7a8a;
+            font-size: 0.8rem;
+            font-weight: 400;
+        }
+
+    .research-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 5px;
+    }
+
+        .research-tags span {
+            background: #f0f2f5;
+            padding: 4px 16px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            border: 1px solid #dce1e8;
+        }
+
+    .print-btn {
+        background: #0d6efd;
+        color: white;
+        border: none;
+        padding: 10px 35px;
+        border-radius: 30px;
+        font-weight: 600;
+        cursor: pointer;
+        margin-top: 30px;
+        float: right;
+        transition: opacity 0.2s;
+    }
+
+        .print-btn:hover {
+            opacity: 0.85;
+        }
+
+    /* ================================================================ */
+    /* ========== CRITICAL PRINT / PDF FIXES ========== */
+    /* ================================================================ */
+    @@media print {
+        /* 1. Hide everything except the CV Wrapper */
+        body * {
+            visibility: hidden;
+        }
+
+        .cv-wrapper, .cv-wrapper * {
+            visibility: visible;
+        }
+        /* 2. Position the CV correctly on the page */
+        .cv-wrapper {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            max-width: 100% !important;
+            margin: 0 !important;
+            padding: 15px 20px !important; /* Reduced padding for A4 */
+            border: none !important; /* <-- REMOVES THE THIN BLACK BORDER */
+            border-top: none !important;
+            box-shadow: none !important;
+            background: white !important;
+            border-radius: 0 !important;
+        }
+        /* 3. Hide the Print Button, Sidebar, Navbar, and Footer */
+        .print-btn, .navbar, .offcanvas, footer {
+            display: none !important;
+        }
+        /* 4. A4 Page Settings - KILLS DEFAULT BROWSER HEADERS/FOOTERS */
+        @@page {
+            size: A4;
+            margin: 0.2in; /* Small margin so text doesn't clip */
+        }
+        /* 5. Prevent sections from breaking across pages */
+        .cv-section {
+            page-break-inside: avoid;
+        }
+
+        .project-entry {
+            page-break-inside: avoid;
+        }
+        /* 6. Ensure background colors & borders print properly */
+        .research-tags span, .tech-tag {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+        /* 7. Force single column on print to avoid overflow */
+        .row-split {
+            display: block !important;
+        }
+
+        .col-left, .col-right {
+            width: 100% !important;
+        }
+        /* 8. Darken text for better print readability */
+        body, .cv-wrapper, .name-title h1, .cv-section h2 {
+            color: black !important;
+        }
+
+        .contact-block a {
+            color: black !important;
+        }
+    }
+
+    @@media (max-width: 700px) {
+        .cv-header {
+            flex-direction: column;
+            align-items: start;
+        }
+
+        .contact-block {
+            text-align: left;
+            margin-top: 10px;
+        }
+
+        .row-split {
+            flex-direction: column;
+        }
+    }
+</style>
+
+<!-- ========== HTML CONTENT ========== -->
+<div class="cv-wrapper">
+
+    <!-- HEADER -->
+    <div class="cv-header">
+        <div style="display:flex; align-items:center; gap:25px;">
+            <div>
+                <img src="@(Model.PersonalInfo?.PhotoPath ?? "/images/default.jpg")"
+                     alt="Profile Photo"
+                     style="width:120px; height:120px; border-radius:50%; object-fit:cover; border:3px solid #0d6efd;" />
+            </div>
+            <div class="name-title">
+                <h1>@(Model.PersonalInfo?.FullName ?? "INKUL AZLA HASAN")</h1>
+                <h3>@(Model.PersonalInfo?.Title ?? "COMPUTER SCIENCE & ENGINEERING STUDENT")</h3>
+                <h5>@(Model.PersonalInfo?.SubTitle ?? "AI & CYBER SECURITY ENTHUSIAST")</h5>
+            </div>
+        </div>
+        <div class="contact-block">
+            <div>📞 @(Model.PersonalInfo?.Phone ?? "+880 1521 514217")</div>
+            <div>✉️ @(Model.PersonalInfo?.Email ?? "inkulazla@gmail.com")</div>
+            <div>📍 @(Model.PersonalInfo?.Address ?? "Mirpur-2, Dhaka")</div>
+            <div>🏠 @(Model.PersonalInfo?.Hometown ?? "Pabna, Rajshahi")</div>
+            <div>
+                <i class="fab fa-linkedin" style="width: 20px; color: #0a66c2;"></i>
+                <a href="https://linkedin.com/in/@(Model.PersonalInfo?.LinkedIn ?? "inkul-azla-hasan-81889b325")" target="_blank" style="text-decoration: none; color: inherit;">
+                    @(Model.PersonalInfo?.LinkedIn ?? "inkul-azla-hasan-81889b325")
+                </a>
+            </div>
+            <div>
+                <i class="fab fa-github" style="width: 20px; color: #333;"></i>
+                <a href="https://github.com/@(Model.PersonalInfo?.Github ?? "Inkulazlalasan")" target="_blank" style="text-decoration: none; color: inherit;">
+                    @(Model.PersonalInfo?.Github ?? "Inkulazlalasan")
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- CAREER OBJECTIVE -->
+    <div class="cv-section">
+        <h2>Career Objective</h2>
+        <p class="text-block">@(Model.PersonalInfo?.CareerObjective ?? "Motivated Computer Science student...")</p>
+    </div>
+
+    <!-- PROFILE SUMMARY -->
+    <div class="cv-section">
+        <h2>Profile Summary</h2>
+        <p class="text-block">@(Model.PersonalInfo?.ProfileSummary ?? "Final-year B.Sc. CSE student...")</p>
+    </div>
+
+    <!-- PROJECTS -->
+    <div class="cv-section">
+        <h2>Projects</h2>
+        @if (Model.Projects.Any())
+        {
+            foreach (var p in Model.Projects)
+            {
+                <div class="project-entry">
+                    <div style="display:flex; align-items:baseline; flex-wrap:wrap; gap:8px;">
+                        <h4>@p.Title</h4>
+                        <a href="https://@p.GithubLink" target="_blank" class="project-link">(GitHub)</a>
+                    </div>
+                    <p>@p.ShortDescription</p>
+                    <div>
+                        <span class="tech-tag">@p.Technologies</span>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p class="text-muted">No projects added yet.</p>
+        }
+    </div>
+
+    <!-- EDUCATION & SKILLS -->
+    <div class="cv-section">
+        <h2>Education &amp; Skills</h2>
+        <div class="row-split">
+            <div class="col-left">
+                @if (Model.Educations.Any())
+                {
+                    foreach (var edu in Model.Educations)
+                    {
+                        <div class="edu-item">
+                            <strong>@edu.Degree</strong>
+                            <div class="meta">
+                                @edu.Institution
+                                <span>@edu.PassingYear | GPA: @edu.Result</span>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p class="text-muted">No education added.</p>
+                }
+            </div>
+            <div class="col-right">
+                <h5 style="font-weight:700; margin-top:0; color:#1a2634;">Technical Skills</h5>
+                <ul class="skill-list">
+                    @foreach (var skill in Model.Skills.Where(s => s.Category == "Technical Skills"))
+                    {
+                        <li>@skill.Name <span class="proficiency">@skill.Proficiency</span></li>
+                    }
+                </ul>
+                <h5 style="font-weight:700; margin-top:18px; color:#1a2634;">Languages</h5>
+                <ul class="skill-list">
+                    @foreach (var skill in Model.Skills.Where(s => s.Category == "Languages"))
+                    {
+                        <li>@skill.Name <span class="proficiency">@skill.Proficiency</span></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- RESEARCH INTERESTS -->
+    <div class="cv-section">
+        <h2>Research Interests</h2>
+        <div class="research-tags">
+            @foreach (var interest in (Model.PersonalInfo?.ResearchInterests ?? "Artificial Intelligence, Computer Vision, Medical Image Analysis, Cyber Security & Digital Forensics, Deep Learning").Split(','))
+            {
+                <span>@interest.Trim()</span>
+            }
+        </div>
+    </div>
+
+    <button class="print-btn" onclick="window.print()">📄 Download as PDF</button>
+    <div style="clear:both;"></div>
+</div>

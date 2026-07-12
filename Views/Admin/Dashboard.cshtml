@@ -1,0 +1,112 @@
+﻿@model CV_Builder.Models.DashboardViewModel
+@{
+    ViewData["Title"] = "Admin Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <h1>Admin Dashboard</h1>
+
+    <div class="d-flex justify-content-between mb-3">
+        <div>
+            <a asp-action="EditPersonalInfo" class="btn btn-warning">✏️ Edit CV Content (Text)</a>
+        </div>
+        <div>
+            <a asp-action="Logout" class="btn btn-danger">Logout</a>
+        </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div class="mt-4">
+        <h3>Projects</h3>
+        <a asp-action="EditProject" class="btn btn-success mb-3">+ Add New Project</a>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Order</th>
+                    <th>Title</th>
+                    <th>Technologies</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in Model.Projects)
+                {
+                    <tr>
+                        <td>@p.DisplayOrder</td>
+                        <td>@p.Title</td>
+                        <td>@p.Technologies</td>
+                        <td>
+                            <a asp-action="EditProject" asp-route-id="@p.Id" class="btn btn-primary btn-sm">Edit</a>
+                            <a asp-action="DeleteProject" asp-route-id="@p.Id" class="btn btn-danger btn-sm" onclick="return confirm('Delete this project?')">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!-- EDUCATION -->
+    <hr />
+    <h3>Education</h3>
+    <a asp-action="EditEducation" class="btn btn-success mb-3">+ Add New Education</a>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Order</th>
+                <th>Degree</th>
+                <th>Institution</th>
+                <th>Result</th>
+                <th>Year</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var edu in Model.Educations)
+            {
+                <tr>
+                    <td>@edu.DisplayOrder</td>
+                    <td>@edu.Degree</td>
+                    <td>@edu.Institution</td>
+                    <td>@edu.Result</td>
+                    <td>@edu.PassingYear</td>
+                    <td>
+                        <a asp-action="EditEducation" asp-route-id="@edu.Id" class="btn btn-primary btn-sm">Edit</a>
+                        <a asp-action="DeleteEducation" asp-route-id="@edu.Id" class="btn btn-danger btn-sm" onclick="return confirm('Delete this education?')">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- SKILLS -->
+    <hr />
+    <h3>Skills</h3>
+    <a asp-action="EditSkill" class="btn btn-success mb-3">+ Add New Skill</a>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Order</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Proficiency</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var skill in Model.Skills)
+            {
+                <tr>
+                    <td>@skill.DisplayOrder</td>
+                    <td>@skill.Name</td>
+                    <td>@skill.Category</td>
+                    <td>@skill.Proficiency</td>
+                    <td>
+                        <a asp-action="EditSkill" asp-route-id="@skill.Id" class="btn btn-primary btn-sm">Edit</a>
+                        <a asp-action="DeleteSkill" asp-route-id="@skill.Id" class="btn btn-danger btn-sm" onclick="return confirm('Delete this skill?')">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
