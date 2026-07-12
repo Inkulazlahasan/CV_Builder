@@ -14,11 +14,11 @@ A fully functional ASP.NET Core MVC web application that allows users to manage 
 
 ## 📸 Screenshots
 
-### 🏠 Public CV View (Homepage)
-![Homepage](Screenshots/HomePage.png)
+### 🏠 Public CV View (Home page)
+![Home page](Screenshots/HomePage.png)
 
 ### 🛠️ Admin Dashboard (Manage Projects, Education, Skills)
-![Admin Dashboard](Screenshots/Admin DAshboard.png)
+![Admin-Dashboard](Screenshots/Admin DAshboard.png)
 
 ### ✏️ Edit CV Content & Profile
 ![Edit Profile](ScreenShots/EditPersonalInfo.png)
