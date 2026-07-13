@@ -1,23 +1,26 @@
-/* === General Reset & Typography === */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f4f7fc;
+/* ================================================================ */
+/* ========== FIX SCROLL BAR & LAYOUT ISSUES ========== */
+/* ================================================================ */
+
+/* Ensures the page scrolls properly (no hidden content) */
+html, body {
+    min-height: 100vh;
+    overflow-y: auto !important;
+    height: auto !important;
 }
 
-/* === Sidebar Link Hover === */
-.offcanvas .nav-link:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 0;
+/* Admin Edit Page - adds bottom padding so buttons are visible */
+.container.mt-4 {
+    padding-bottom: 120px !important;
 }
 
-/* === Footer Fix for Print === */
-footer {
-    display: block;
+/* Removes any hidden overflow on the main content */
+main {
+    overflow: visible !important;
 }
 
-/* === RESPONSIVE TWEAKS === */
-@media (max-width: 768px) {
-    .navbar-brand {
-        font-size: 1.0rem !important;
-    }
+/* Ensures forms don't clip content */
+form {
+    overflow: visible !important;
+    min-height: 100vh;
 }

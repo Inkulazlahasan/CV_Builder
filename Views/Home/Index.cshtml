@@ -19,9 +19,10 @@
         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
         padding: 40px 45px;
         border-radius: 8px;
-        border-top: 7px solid #0d6efd; /* Hardcoded professional blue */
+        border-top: 7px solid #0d6efd;
     }
 
+    /* ===== HEADER ===== */
     .cv-header {
         display: flex;
         justify-content: space-between;
@@ -72,6 +73,11 @@
                 text-decoration: underline;
             }
 
+        .contact-block i {
+            margin-right: 4px;
+        }
+
+    /* ===== SECTIONS ===== */
     .cv-section h2 {
         font-size: 1.2rem;
         font-weight: 700;
@@ -89,6 +95,7 @@
         font-size: 0.95rem;
     }
 
+    /* ===== PROJECTS ===== */
     .project-entry {
         margin-bottom: 20px;
     }
@@ -124,6 +131,7 @@
             line-height: 1.5;
         }
 
+    /* ===== EDUCATION & SKILLS (Two Columns) ===== */
     .row-split {
         display: flex;
         gap: 40px;
@@ -180,6 +188,7 @@
             font-weight: 400;
         }
 
+    /* ===== RESEARCH INTERESTS ===== */
     .research-tags {
         display: flex;
         flex-wrap: wrap;
@@ -195,6 +204,7 @@
             border: 1px solid #dce1e8;
         }
 
+    /* ===== PRINT BUTTON ===== */
     .print-btn {
         background: #0d6efd;
         color: white;
@@ -221,7 +231,8 @@
             visibility: hidden;
         }
 
-        .cv-wrapper, .cv-wrapper * {
+        .cv-wrapper,
+        .cv-wrapper * {
             visibility: visible;
         }
         /* 2. Position the CV correctly on the page */
@@ -232,21 +243,24 @@
             width: 100%;
             max-width: 100% !important;
             margin: 0 !important;
-            padding: 15px 20px !important; /* Reduced padding for A4 */
-            border: none !important; /* <-- REMOVES THE THIN BLACK BORDER */
+            padding: 15px 20px !important;
+            border: none !important;
             border-top: none !important;
             box-shadow: none !important;
             background: white !important;
             border-radius: 0 !important;
         }
         /* 3. Hide the Print Button, Sidebar, Navbar, and Footer */
-        .print-btn, .navbar, .offcanvas, footer {
+        .print-btn,
+        .navbar,
+        .offcanvas,
+        footer {
             display: none !important;
         }
-        /* 4. A4 Page Settings - KILLS DEFAULT BROWSER HEADERS/FOOTERS */
+        /* 4. A4 Page Settings */
         @@page {
             size: A4;
-            margin: 0.2in; /* Small margin so text doesn't clip */
+            margin: 0.2in;
         }
         /* 5. Prevent sections from breaking across pages */
         .cv-section {
@@ -257,7 +271,8 @@
             page-break-inside: avoid;
         }
         /* 6. Ensure background colors & borders print properly */
-        .research-tags span, .tech-tag {
+        .research-tags span,
+        .tech-tag {
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
         }
@@ -266,11 +281,15 @@
             display: block !important;
         }
 
-        .col-left, .col-right {
+        .col-left,
+        .col-right {
             width: 100% !important;
         }
         /* 8. Darken text for better print readability */
-        body, .cv-wrapper, .name-title h1, .cv-section h2 {
+        body,
+        .cv-wrapper,
+        .name-title h1,
+        .cv-section h2 {
             color: black !important;
         }
 
@@ -279,6 +298,7 @@
         }
     }
 
+    /* ===== RESPONSIVE ===== */
     @@media (max-width: 700px) {
         .cv-header {
             flex-direction: column;
@@ -296,16 +316,20 @@
     }
 </style>
 
-<!-- ========== HTML CONTENT ========== -->
+<!-- ================================================================ -->
+<!-- ===================== HTML CONTENT ============================= -->
+<!-- ================================================================ -->
+
 <div class="cv-wrapper">
 
-    <!-- HEADER -->
+    <!-- ===== HEADER ===== -->
     <div class="cv-header">
         <div style="display:flex; align-items:center; gap:25px;">
-            <div>
+            <!-- PHOTO - Perfect Circle (FIXED) -->
+            <div style="width: 120px; height: 120px; flex-shrink: 0; border-radius: 50%; overflow: hidden; border: 3px solid #0d6efd; background: #e9ecef;">
                 <img src="@(Model.PersonalInfo?.PhotoPath ?? "/images/default.jpg")"
                      alt="Profile Photo"
-                     style="width:120px; height:120px; border-radius:50%; object-fit:cover; border:3px solid #0d6efd;" />
+                     style="width: 100%; height: 100%; object-fit: cover; display: block;" />
             </div>
             <div class="name-title">
                 <h1>@(Model.PersonalInfo?.FullName ?? "INKUL AZLA HASAN")</h1>
@@ -319,33 +343,33 @@
             <div>📍 @(Model.PersonalInfo?.Address ?? "Mirpur-2, Dhaka")</div>
             <div>🏠 @(Model.PersonalInfo?.Hometown ?? "Pabna, Rajshahi")</div>
             <div>
-                <i class="fab fa-linkedin" style="width: 20px; color: #0a66c2;"></i>
-                <a href="https://linkedin.com/in/@(Model.PersonalInfo?.LinkedIn ?? "inkul-azla-hasan-81889b325")" target="_blank" style="text-decoration: none; color: inherit;">
+                <i class="fab fa-linkedin" style="width:20px; color:#0a66c2;"></i>
+                <a href="https://linkedin.com/in/@(Model.PersonalInfo?.LinkedIn ?? "inkul-azla-hasan-81889b325")" target="_blank" style="text-decoration:none; color:inherit;">
                     @(Model.PersonalInfo?.LinkedIn ?? "inkul-azla-hasan-81889b325")
                 </a>
             </div>
             <div>
-                <i class="fab fa-github" style="width: 20px; color: #333;"></i>
-                <a href="https://github.com/@(Model.PersonalInfo?.Github ?? "Inkulazlalasan")" target="_blank" style="text-decoration: none; color: inherit;">
+                <i class="fab fa-github" style="width:20px; color:#333;"></i>
+                <a href="https://github.com/@(Model.PersonalInfo?.Github ?? "Inkulazlalasan")" target="_blank" style="text-decoration:none; color:inherit;">
                     @(Model.PersonalInfo?.Github ?? "Inkulazlalasan")
                 </a>
             </div>
         </div>
     </div>
 
-    <!-- CAREER OBJECTIVE -->
+    <!-- ===== CAREER OBJECTIVE ===== -->
     <div class="cv-section">
         <h2>Career Objective</h2>
-        <p class="text-block">@(Model.PersonalInfo?.CareerObjective ?? "Motivated Computer Science student...")</p>
+        <p class="text-block">@(Model.PersonalInfo?.CareerObjective ?? "Motivated Computer Science student with a strong interest in software development, web technologies, data analysis and Cyber Security. Eager to apply academic knowledge in real-world projects and continue improving technical and problem-solving skills through hands-on experience.")</p>
     </div>
 
-    <!-- PROFILE SUMMARY -->
+    <!-- ===== PROFILE SUMMARY ===== -->
     <div class="cv-section">
         <h2>Profile Summary</h2>
-        <p class="text-block">@(Model.PersonalInfo?.ProfileSummary ?? "Final-year B.Sc. CSE student...")</p>
+        <p class="text-block">@(Model.PersonalInfo?.ProfileSummary ?? "Final-year B.Sc. CSE student at Bangladesh University of Business and Technology (BUBT), Dhaka; CGPA 3.62/4.00. Proficient in Python, Java, C, C++, C#, and modern web/mobile technologies including React, Node.js, Django, Flask, and REST API development. Built and delivered full-stack projects spanning e-commerce platforms, Android applications, desktop systems, and AI/CV research. Research interest in Artificial Intelligence, Computer Vision, Medical Image Analysis, and Cyber Security. Team-oriented with strong problem-solving and communication skills; consistently high academic performance including perfect GPA in SSC and HSC.")</p>
     </div>
 
-    <!-- PROJECTS -->
+    <!-- ===== PROJECTS ===== -->
     <div class="cv-section">
         <h2>Projects</h2>
         @if (Model.Projects.Any())
@@ -370,10 +394,11 @@
         }
     </div>
 
-    <!-- EDUCATION & SKILLS -->
+    <!-- ===== EDUCATION & SKILLS ===== -->
     <div class="cv-section">
         <h2>Education &amp; Skills</h2>
         <div class="row-split">
+            <!-- LEFT: EDUCATION -->
             <div class="col-left">
                 @if (Model.Educations.Any())
                 {
@@ -393,6 +418,8 @@
                     <p class="text-muted">No education added.</p>
                 }
             </div>
+
+            <!-- RIGHT: SKILLS -->
             <div class="col-right">
                 <h5 style="font-weight:700; margin-top:0; color:#1a2634;">Technical Skills</h5>
                 <ul class="skill-list">
@@ -401,6 +428,7 @@
                         <li>@skill.Name <span class="proficiency">@skill.Proficiency</span></li>
                     }
                 </ul>
+
                 <h5 style="font-weight:700; margin-top:18px; color:#1a2634;">Languages</h5>
                 <ul class="skill-list">
                     @foreach (var skill in Model.Skills.Where(s => s.Category == "Languages"))
@@ -412,7 +440,7 @@
         </div>
     </div>
 
-    <!-- RESEARCH INTERESTS -->
+    <!-- ===== RESEARCH INTERESTS ===== -->
     <div class="cv-section">
         <h2>Research Interests</h2>
         <div class="research-tags">
@@ -423,6 +451,8 @@
         </div>
     </div>
 
+    <!-- ===== DOWNLOAD PDF BUTTON ===== -->
     <button class="print-btn" onclick="window.print()">📄 Download as PDF</button>
     <div style="clear:both;"></div>
+
 </div>

@@ -15,7 +15,7 @@ namespace CV_Builder.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var personalInfo = await _context.PersonalInfos.FirstOrDefaultAsync();
+            var personalInfo = await _context.PersonalInfos.OrderBy(p => p.Id).FirstOrDefaultAsync();
             var projects = await _context.Projects.OrderBy(p => p.DisplayOrder).ToListAsync();
             var educations = await _context.Educations.ToListAsync();
             var skills = await _context.Skills.ToListAsync();
